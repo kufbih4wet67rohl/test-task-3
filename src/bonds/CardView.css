@@ -1,6 +1,5 @@
 
 .bond-card-view {
-    --left-offset: 26px;
     width: 500px;
     font-size: 17px;
 }
@@ -9,7 +8,7 @@
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    margin: 0 20px 0 var(--left-offset);
+    margin: 0 20px 0 26px;
 }
 
 .bond-card-view__title {
@@ -27,7 +26,7 @@
 }
 
 .bond-card-view__details {
-    margin: 0 20px 15px var(--left-offset);
+    margin: 0 20px 15px 26px;
     border-bottom: 2px solid rgb(209, 209, 209);
     padding: 12px 0 16px 0;
 }
@@ -64,7 +63,7 @@ select.bond-card-view__button {
 }
 
 .bond-card-view__periods {
-    margin: 0 20px 15px var(--left-offset);
+    margin: 0 20px 15px 26px;
 }
 
 .bond-card-view__period:not(:first-child) {
