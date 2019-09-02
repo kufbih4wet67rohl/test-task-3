@@ -25,26 +25,43 @@ class Card extends React.Component {
         super(props);
         this.onChangeType = (type) => {
             this.props.dispatchAction('change-type', {type});
-            this.loadCurve(this.props.isin, type, this.props.period);
+            this.loadCurve({type});
         };
         this.onChangePeriod = (period) => {
             this.props.dispatchAction('change-period', {period});
-            this.loadCurve(this.props.isin, this.props.type, period);
+            this.loadCurve({period});
         };
     }
 
     componentDidMount() {
+        this.loadInfo();
+        this.loadCurve();
+    }
+
+    componentDidUpdate() {
+        this.loadInfo();
+        this.loadCurve();
+    }
+
+    loadInfo(options) {
         const props = this.props;
-        this.loadInfo(props.isin);
-        this.loadCurve(props.isin, props.type, props.period);
+        if (!props.isInfoLoading) {
+            const {isin = props.isin} = options || {};
+            if (isin !== props.loaded.isin) {
+                props.dispatchAction('fetch-info', {url:`/bonds/${isin}/info`});
+            }
+        }
     }
 
-    loadInfo(isin) {
-        this.props.dispatchAction('fetch-info', {url:`/bonds/${isin}/info`});
-    }
-
-    loadCurve(isin, type, period) {
-        this.props.dispatchAction('fetch-curve', {url:`/bonds/${isin}/${type}`, period});
+    loadCurve(options) {
+        const props = this.props;
+        if (!props.isCurveLoading) {
+            const {isin = props.isin, type = props.type, period = props.period} = options || {};
+            const loaded = props.loaded;
+            if (isin !== loaded.isin || type !== loaded.type || period !== loaded.period) {
+                props.dispatchAction('fetch-curve', {url:`/bonds/${isin}/${type}`, period});
+            }
+        }
     }
 
     render() {

@@ -35,7 +35,8 @@ const _defaultSate = {
     currency: '',
     description: '',
     times: [],
-    values: []
+    values: [],
+    loaded: {}
 };
 
 /**
@@ -99,13 +100,15 @@ export const reducer = (state = _defaultSate, action) => {
         case FETCH_INFO_START:
             return {...state, isInfoLoading:true, infoErr:undefined};
         case FETCH_INFO_END:
-            return {...state, isInfoLoading:false, infoErr:undefined, ...action.data};
+            const {isin:infoIsin, ...info} = action.data;
+            return {...state, isInfoLoading:false, infoErr:undefined, loaded:{...state.loaded, isin:infoIsin}, ...info};
         case FETCH_INFO_ERROR:
             return {...state, isInfoLoading:false, infoErr:action.err};
         case FETCH_CURVE_START:
             return {...state, isCurveLoading:true, curveErr:undefined};
         case FETCH_CURVE_END:
-            return {...state, isCurveLoading:false, curveErr:undefined, ...action.data};
+            const {isin:curveIsin, type, period, ...curve} = action.data;
+            return {...state, isCurveLoading:false, curveErr:undefined, loaded:{...state.loaded, isin:curveIsin, type, period}, ...curve};
         case FETCH_CURVE_ERROR:
             return {...state, isCurveLoading:false, curveErr:action.err};
         case CHANGE_TYPE:
