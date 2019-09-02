@@ -1,17 +1,30 @@
 {
-  "name": "t3_bondcard",
-  "version": "0.1.0",
+  "name": "test_task_3",
+  "version": "1.0.0",
+  "description": "Тестовое задание 3. Карточка облигации",
+  "author": "Victor A.Skvortsov",
   "private": true,
-  "dependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "react-scripts": "3.1.1",
+    "react-vis": "^1.11.7",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "tinydate": "^1.2.0"
+  },
+  "devDependencies": {
+    "react-test-renderer": "^16.9.0",
+    "redux-logger": "^3.0.6"
   },
   "eslintConfig": {
     "extends": "react-app"

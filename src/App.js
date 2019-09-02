@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
+import * as Redux from 'redux';
+import {Provider as ReduxProvider} from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import BondCard from './bonds/Card';
+import * as BondCardRedux from './bonds/CardRedux';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+
+const store = Redux.createStore(
+    Redux.combineReducers({
+        [BondCardRedux.namespace]: BondCardRedux.reducer
+    }),
+    {},
+    Redux.applyMiddleware(ReduxThunk)
+);
+
+const App = () => {
+    return (
+        <div className="bonds-app">
+            <ReduxProvider store={store}>
+                <BondCard
+                    isin={'US67021BAE92'}
+                    type={'spread'}
+                    period={'month'}
+                />
+            </ReduxProvider>
+        </div>
+    );
+};
 
 export default App;
