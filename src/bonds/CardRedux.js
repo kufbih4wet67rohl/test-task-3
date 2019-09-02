@@ -29,7 +29,6 @@ const CHANGE_PERIOD     = `${namespace}/CHANGE_PERIOD`;
  * @type {object}
  */
 const _defaultSate = {
-    isin: '',
     name: '',
     unknownNumber1: 0,
     unknownNumber2: 0,
@@ -125,10 +124,7 @@ export const reducer = (state = _defaultSate, action) => {
  * @param {object} ownProps Собственные свойства компонента
  * @return {object}
  */
-export const mapStateToProps = (state = _defaultSate/*, ownProps*/) => {
-    const {isin, ...data} = state[namespace];
-    return data;
-};
+export const mapStateToProps = (state = _defaultSate/*, ownProps*/) => ({...state[namespace]});
 
 /**
  * @public
