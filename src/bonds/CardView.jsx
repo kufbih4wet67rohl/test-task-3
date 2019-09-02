@@ -94,6 +94,7 @@ export default class CardView extends React.Component {
                                 text: {stroke:'none', fill:'rgb(132, 132, 132)'}
                             }}
                             tickFormat={this._getTimeAxesFormater()}
+                            tickTotal={5}
                         />
                         <ReactVis.YAxis
                             style={{
