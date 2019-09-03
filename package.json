@@ -8,6 +8,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:cover": "react-scripts test --coverage --no-watchAll",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -39,6 +40,12 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/index.js",
+      "<rootDir>/src/serviceWorker.js"
     ]
   }
 }
