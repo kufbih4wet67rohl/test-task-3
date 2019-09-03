@@ -5,7 +5,7 @@
  *     get  /bonds/:isin/info - для запроса информации об эмитенте
  *     post /bonds/:isin/:type - для запроса котировок с параметром period
  * где:
- *     :isin - идентификатор эмитента, соответствующий маске: [A-Z0-9]{12}
+ *     :isin - идентификатор интструмента, соответствующий маске: [A-Z0-9]{12}
  *     :type - тип котировок, принимающий значения: price, spread, yield
  *     period - необязательный период, принимающий значения: week, month, quarter, year, max (по умолчанию)
  *
@@ -21,15 +21,7 @@ const http = {
         const isin = match[1].toUpperCase();
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                const result = {
-                    isin: isin,
-                    name: 'NII CAPITAL',
-                    unknownNumber1: 7.625,
-                    unknownNumber2: 21,
-                    currency: 'USD',
-                    description: `NII CAPITAL CORP, Telecommunications, NR, till ${(new Date()).toLocaleTimeString()}`
-                };
-                resolve(result);
+                resolve(_makeInfo(isin));
             }, 500);// Использована демонстрационная задаержка
         });
     },
@@ -41,7 +33,7 @@ const http = {
         }
         const isin = match[1].toUpperCase();
         const type = match[2];
-        let {period} = body;
+        const {period} = body;
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 const {times, values} = _makeCurve(type, period);
@@ -62,6 +54,22 @@ const CURVE_CONFIG = {
     quarter: {count:13, step:7*24*3600000},
     year: {count:12, step:30.5*24*3600000},
     max: {count:12, step:91*24*3600000}
+};
+
+/**
+ * Сформировать информацию об эмитенте
+ * @private
+ * @param {string} isin Идентификатор инструмента
+ */
+const _makeInfo = (isin) => {
+    return {
+        isin: isin,
+        name: 'NII CAPITAL',
+        unknownNumber1: 7.625,
+        unknownNumber2: 21,
+        currency: 'USD',
+        description: `NII CAPITAL CORP, Telecommunications, NR, till ${(new Date()).toLocaleTimeString()}`
+    };
 };
 
 /**
