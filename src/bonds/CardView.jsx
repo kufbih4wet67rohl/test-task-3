@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import * as ReactVis from 'react-vis';
 import TinyDate from 'tinydate';
 import './CardView.css';
@@ -71,7 +70,7 @@ export default class CardView extends React.Component {
                     <div className="bond-card-view__periods">
                         {PERIODS.map((period) => (
                             <button
-                                className={classNames('bond-card-view__period bond-card-view__button', {'bond-card-view__button_active':period === props.period})}
+                                className={'bond-card-view__period bond-card-view__button' + (period === props.period ? ' bond-card-view__button_active' : '')}
                                 key={period}
                                 value={period}
                                 onClick={this.onChangePeriod}
